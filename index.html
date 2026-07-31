@@ -1958,7 +1958,7 @@
       function crearMensajeWhatsapp(confirmacion) {
         const cantidad = confirmacion.personas === 1 ? '1 persona' : `${confirmacion.personas} personas`;
         const texto = confirmacion.asistira
-          ? `Hola, soy ${confirmacion.nombre}. Confirmo la asistencia de ${cantidad} a la presentación y cumpleaños 8 de ${INVITACION.nombre}.`
+          ? `Hola, soy de la familia${confirmacion.nombre}. Confirmo la asistencia de ${cantidad} al cumpleaños 8 de ${INVITACION.nombre}.`
           : `Hola, soy ${confirmacion.nombre}. No podré asistir a la presentación y cumpleaños 8 de ${INVITACION.nombre}.`;
 
         return confirmacion.mensaje
