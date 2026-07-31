@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Panel de confirmaciones · Bek Jan</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1b1b4b;
+      --pink: #ff2aa3;
+      --blue: #18c8ff;
+      --green: #a7ff3c;
+      --yellow: #ffe14d;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #f4f1ff;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(24,200,255,.16), transparent 32%),
+        radial-gradient(circle at 82% 14%, rgba(255,79,147,.20), transparent 34%),
+        linear-gradient(135deg, #07142f 0%, #130d42 48%, #351460 100%);
+      background-attachment: fixed;
+    }
+    .panel {
+      background: rgba(23, 12, 56, .55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    .kpi {
+      border-radius: 18px;
+      padding: 1.2rem;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      height: 100%;
+    }
+    .kpi-num { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; line-height: 1; }
+    .kpi-lbl { font-size: .74rem; text-transform: uppercase; letter-spacing: .12em; opacity: .7; margin-top: .4rem; }
+    .form-control-dark {
+      background: rgba(11,5,36,.5); color: #fff;
+      border: 2px solid rgba(255,255,255,.2); border-radius: 12px; padding: .7rem .9rem;
+    }
+    .form-control-dark:focus {
+      background: rgba(11,5,36,.7); color: #fff;
+      border-color: var(--yellow); box-shadow: none;
+    }
+    .form-control-dark::placeholder { color: rgba(255,255,255,.5); }
+    .btn-rounded { border-radius: 999px; font-weight: 800; padding: .7rem 1.4rem; border: 0; }
+    .btn-go { background: var(--green); color: #123300; }
+    .btn-ghost { border: 2px solid rgba(255,255,255,.4); color: #fff; background: transparent; }
+    .btn-ghost:hover { background: rgba(255,255,255,.12); color: #fff; }
+    table { color: #f4f1ff; }
+    .table > :not(caption) > * > * { background: transparent; color: #f4f1ff; border-color: rgba(255,255,255,.12); }
+    .table thead th {
+      font-size: .72rem; text-transform: uppercase; letter-spacing: .1em;
+      opacity: .7; font-weight: 800;
+    }
+    .pill { border-radius: 999px; padding: .2rem .7rem; font-size: .78rem; font-weight: 800; }
+    .pill-si { background: rgba(167,255,60,.2); color: var(--green); }
+    .pill-no { background: rgba(255,42,163,.2); color: #ff86c8; }
+    .msg-cell { max-width: 320px; white-space: pre-wrap; font-size: .9rem; opacity: .9; }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid var(--yellow); outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container py-5">
+
+    <!-- Aviso si falta configuración -->
+    <div id="avisoConfig" class="alert alert-warning d-none" role="alert">
+      Falta configurar Supabase. Abre <code>supabase-config.js</code> y pega la URL
+      del proyecto y la anon key.
+    </div>
+
+    <!-- LOGIN -->
+    <section id="vistaLogin" class="d-none">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-5">
+          <div class="panel p-4 p-md-5">
+            <h1 class="h4 fw-bold mb-1">Panel de confirmaciones</h1>
+            <p class="mb-4" style="opacity:.75">Acceso solo para la familia.</p>
+
+            <form id="formLogin">
+              <div class="mb-3">
+                <label for="email" class="form-label fw-bold">Correo</label>
+                <input type="email" id="email" class="form-control form-control-dark"
+                       autocomplete="email" required />
+              </div>
+              <div class="mb-4">
+                <label for="password" class="form-label fw-bold">Contraseña</label>
+                <input type="password" id="password" class="form-control form-control-dark"
+                       autocomplete="current-password" required />
+              </div>
+              <button type="submit" class="btn btn-rounded btn-go w-100" id="btnLogin">
+                Entrar
+              </button>
+            </form>
+
+            <p class="mt-3 mb-0 text-danger fw-bold" id="errorLogin" role="alert" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="vistaPanel" class="d-none">
+
+      <div class="d-flex flex-wrap gap-3 justify-content-between align-items-center mb-4">
+        <div>
+          <h1 class="h3 fw-bold mb-1">Confirmaciones</h1>
+          <p class="mb-0" style="opacity:.7" id="sesionInfo"></p>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+          <button class="btn btn-rounded btn-ghost" id="btnRecargar">Actualizar</button>
+          <button class="btn btn-rounded btn-go" id="btnCsv">Descargar CSV</button>
+          <button class="btn btn-rounded btn-ghost" id="btnSalir">Salir</button>
+        </div>
+      </div>
+
+      <!-- Indicadores -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-lg-3">
+          <div class="kpi">
+            <div class="kpi-num" id="kpiRespuestas">0</div>
+            <div class="kpi-lbl">Respuestas</div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="kpi">
+            <div class="kpi-num" style="color:var(--green)" id="kpiFamilias">0</div>
+            <div class="kpi-lbl">Familias que sí van</div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="kpi">
+            <div class="kpi-num" style="color:var(--yellow)" id="kpiPersonas">0</div>
+            <div class="kpi-lbl">Personas en total</div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="kpi">
+            <div class="kpi-num" style="color:#ff86c8" id="kpiNo">0</div>
+            <div class="kpi-lbl">No podrán asistir</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla -->
+      <div class="panel p-3 p-md-4">
+        <div class="row g-2 align-items-center mb-3">
+          <div class="col-12 col-md-6">
+            <label for="buscar" class="visually-hidden">Buscar</label>
+            <input type="search" id="buscar" class="form-control form-control-dark"
+                   placeholder="Buscar por nombre o mensaje" />
+          </div>
+          <div class="col-12 col-md-6">
+            <label for="filtro" class="visually-hidden">Filtrar</label>
+            <select id="filtro" class="form-control form-control-dark">
+              <option value="todos">Mostrar todas</option>
+              <option value="si">Solo quienes asisten</option>
+              <option value="no">Solo quienes no asisten</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Asiste</th>
+                <th scope="col">Personas</th>
+                <th scope="col">Mensaje</th>
+                <th scope="col">Fecha</th>
+                <th scope="col"><span class="visually-hidden">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+
+        <p class="mt-3 mb-0" id="vacio" style="opacity:.7"></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+    const cfg = window.SUPABASE_CONFIG || {};
+    const configurado = cfg.url && cfg.anonKey
+      && !cfg.url.includes('TU-PROYECTO') && !cfg.anonKey.includes('TU_ANON_KEY');
+
+    const vistaLogin = document.getElementById('vistaLogin');
+    const vistaPanel = document.getElementById('vistaPanel');
+    const tbody = document.getElementById('tbody');
+    const vacio = document.getElementById('vacio');
+
+    if (!configurado) {
+      document.getElementById('avisoConfig').classList.remove('d-none');
+    } else {
+      arrancar();
+    }
+
+    function arrancar() {
+      const db = window.supabase.createClient(cfg.url, cfg.anonKey);
+      let datos = [];
+      let canal = null;
+
+      // ---------- Sesión ----------
+      db.auth.getSession().then(({ data }) => mostrarVista(data.session));
+      db.auth.onAuthStateChange((_evento, session) => mostrarVista(session));
+
+      function mostrarVista(session) {
+        const dentro = Boolean(session);
+        vistaLogin.classList.toggle('d-none', dentro);
+        vistaPanel.classList.toggle('d-none', !dentro);
+
+        if (dentro) {
+          document.getElementById('sesionInfo').textContent = session.user.email;
+          cargar();
+          suscribir();
+        } else if (canal) {
+          db.removeChannel(canal);
+          canal = null;
+        }
+      }
+
+      // ---------- Login ----------
+      document.getElementById('formLogin').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('btnLogin');
+        const err = document.getElementById('errorLogin');
+        err.textContent = '';
+        btn.disabled = true;
+        btn.textContent = 'Entrando…';
+
+        const { error } = await db.auth.signInWithPassword({
+          email: document.getElementById('email').value.trim(),
+          password: document.getElementById('password').value
+        });
+
+        btn.disabled = false;
+        btn.textContent = 'Entrar';
+        if (error) err.textContent = 'No pudimos entrar. Revisa el correo y la contraseña.';
+      });
+
+      document.getElementById('btnSalir').addEventListener('click', () => db.auth.signOut());
+
+      // ---------- Datos ----------
+      async function cargar() {
+        const { data, error } = await db
+          .from('confirmaciones')
+          .select('*')
+          .order('creado_en', { ascending: false });
+
+        if (error) {
+          vacio.textContent = 'No se pudieron cargar los datos. Verifica que tu correo esté en las políticas RLS.';
+          console.warn(error);
+          return;
+        }
+        datos = data || [];
+        pintar();
+      }
+
+      function suscribir() {
+        if (canal) return;
+        canal = db.channel('confirmaciones-live')
+          .on('postgres_changes',
+              { event: '*', schema: 'public', table: 'confirmaciones' },
+              () => cargar())
+          .subscribe();
+      }
+
+      document.getElementById('btnRecargar').addEventListener('click', cargar);
+      document.getElementById('buscar').addEventListener('input', pintar);
+      document.getElementById('filtro').addEventListener('change', pintar);
+
+      // ---------- Render ----------
+      function filtrados() {
+        const q = document.getElementById('buscar').value.trim().toLowerCase();
+        const f = document.getElementById('filtro').value;
+
+        return datos.filter((r) => {
+          if (f === 'si' && !r.asistira) return false;
+          if (f === 'no' && r.asistira) return false;
+          if (!q) return true;
+          return (r.nombre || '').toLowerCase().includes(q)
+              || (r.mensaje || '').toLowerCase().includes(q);
+        });
+      }
+
+      function pintar() {
+        // Los indicadores siempre reflejan el total, no el filtro
+        const si = datos.filter((r) => r.asistira);
+        document.getElementById('kpiRespuestas').textContent = datos.length;
+        document.getElementById('kpiFamilias').textContent = si.length;
+        document.getElementById('kpiPersonas').textContent =
+          si.reduce((suma, r) => suma + (r.personas || 0), 0);
+        document.getElementById('kpiNo').textContent = datos.length - si.length;
+
+        const lista = filtrados();
+        tbody.textContent = '';
+
+        lista.forEach((r) => {
+          const tr = document.createElement('tr');
+
+          const tdNombre = document.createElement('td');
+          tdNombre.className = 'fw-bold';
+          tdNombre.textContent = r.nombre;
+
+          const tdAsiste = document.createElement('td');
+          const pill = document.createElement('span');
+          pill.className = 'pill ' + (r.asistira ? 'pill-si' : 'pill-no');
+          pill.textContent = r.asistira ? 'Sí' : 'No';
+          tdAsiste.appendChild(pill);
+
+          const tdPersonas = document.createElement('td');
+          tdPersonas.textContent = r.asistira ? r.personas : '—';
+
+          const tdMensaje = document.createElement('td');
+          tdMensaje.className = 'msg-cell';
+          tdMensaje.textContent = r.mensaje || '';
+
+          const tdFecha = document.createElement('td');
+          tdFecha.style.whiteSpace = 'nowrap';
+          tdFecha.style.opacity = '.8';
+          tdFecha.textContent = new Date(r.creado_en).toLocaleString('es-MX', {
+            day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
+          });
+
+          const tdAcc = document.createElement('td');
+          const del = document.createElement('button');
+          del.type = 'button';
+          del.className = 'btn btn-sm btn-outline-light';
+          del.textContent = 'Borrar';
+          del.setAttribute('aria-label', 'Borrar la confirmación de ' + r.nombre);
+          del.addEventListener('click', () => borrar(r));
+          tdAcc.appendChild(del);
+
+          tr.append(tdNombre, tdAsiste, tdPersonas, tdMensaje, tdFecha, tdAcc);
+          tbody.appendChild(tr);
+        });
+
+        vacio.textContent = lista.length
+          ? ''
+          : (datos.length ? 'Ninguna confirmación coincide con la búsqueda.'
+                          : 'Todavía no hay confirmaciones.');
+      }
+
+      async function borrar(fila) {
+        if (!confirm('¿Borrar la confirmación de ' + fila.nombre + '? Esta acción no se puede deshacer.')) return;
+        const { error } = await db.from('confirmaciones').delete().eq('id', fila.id);
+        if (error) {
+          alert('No se pudo borrar.');
+          console.warn(error);
+          return;
+        }
+        cargar();
+      }
+
+      // ---------- CSV ----------
+      document.getElementById('btnCsv').addEventListener('click', () => {
+        const escapar = (v) => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+        const filas = [
+          ['Nombre', 'Asiste', 'Personas', 'Mensaje', 'Fecha'],
+          ...datos.map((r) => [
+            r.nombre,
+            r.asistira ? 'Si' : 'No',
+            r.asistira ? r.personas : '',
+            r.mensaje || '',
+            new Date(r.creado_en).toLocaleString('es-MX')
+          ])
+        ];
+
+        // El BOM hace que Excel abra bien los acentos
+        const csv = '\uFEFF' + filas.map((f) => f.map(escapar).join(',')).join('\r\n');
+        const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'confirmaciones-bekjan.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,2060 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- METADATA -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Bek Jan te invita! · Presentación + 8 años</title>
+  <meta name="description" content="Invitación a la presentación y cumpleaños número 8 de Bek Jan Hernández Mendoza (Bek Jan). Sábado 8 de agosto de 2026 · 5:30 PM." />
+  <meta name="theme-color" content="#0b0524" />
+  <meta property="og:title" content="¡Bek Jan te invita! · Presentación + 8 años" />
+  <meta property="og:description" content="Acompáñame en mi presentación y mis 8 años. Sábado 8 de agosto de 2026 · 5:30 PM." />
+  <meta property="og:type" content="website" />
+
+  <!-- BOOTSTRAP CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- ESTILOS PERSONALIZADOS -->
+  <style>
+    :root {
+      --bk-deep: #0b0524;
+      --bk-deep2: #150a3a;
+      --bk-purple: #6a2ce0;
+      --bk-purple-soft: #8b5cf6;
+      --bk-pink: #ff2aa3;
+      --bk-blue: #18c8ff;
+      --bk-green: #a7ff3c;
+      --bk-yellow: #ffe14d;
+      --bk-red: #ff3b3b;
+      --bk-cream: #fbf7ef;
+      --bk-ink: #241a3d;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { overflow-x: hidden; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: #fffaf2;
+      background: #07091f;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* ============ FONDO UNIVERSO GLOBAL (detrás de toda la página) ============ */
+    .global-cosmos {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(24, 200, 255, 0.18), transparent 32%),
+        radial-gradient(circle at 82% 14%, rgba(255, 79, 147, 0.22), transparent 34%),
+        radial-gradient(circle at 50% 88%, rgba(123, 44, 255, 0.22), transparent 40%),
+        linear-gradient(135deg, #07142f 0%, #130d42 48%, #351460 100%);
+    }
+    /* Textura sutil tipo scanlines */
+    .global-cosmos::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.035) 0,
+        rgba(255,255,255,0.035) 1px,
+        transparent 1px,
+        transparent 5px
+      );
+      opacity: 0.38;
+      mix-blend-mode: screen;
+    }
+
+    /* Tres capas de estrellas con velocidades distintas = profundidad */
+    .cosmos-stars {
+      position: absolute;
+      inset: -20%;
+      background-repeat: repeat;
+      opacity: 0.7;
+    }
+    .stars-a {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.9) 1.1px, transparent 1.5px);
+      background-size: 80px 80px;
+      animation: driftA 34s linear infinite;
+    }
+    .stars-b {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1.4px);
+      background-size: 130px 130px;
+      animation: driftB 48s linear infinite;
+    }
+    .stars-c {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1.3px);
+      background-size: 45px 45px;
+      animation: driftC 26s linear infinite;
+    }
+    @keyframes driftA { from { transform: translate3d(0,0,0); } to { transform: translate3d(-120px, 90px, 0); } }
+    @keyframes driftB { from { transform: translate3d(0,0,0); } to { transform: translate3d(160px, -110px, 0); } }
+    @keyframes driftC { from { transform: translate3d(0,0,0); } to { transform: translate3d(-80px, -80px, 0); } }
+
+    /* Objetos Oliver Tree-inspired en vez de planetas genéricos */
+    .cosmos-object {
+      position: absolute;
+      z-index: 2;
+      user-select: none;
+      pointer-events: none;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      color: #fff;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.35));
+      animation: floatCosmos 7s ease-in-out infinite;
+    }
+    /* Objetos dibujados en SVG: se controlan con font-size */
+    .object-glasses { top: 10%; right: 10%; font-size: clamp(1.5rem, 3vw, 3rem); transform: rotate(8deg); }
+    .object-bolt    { top: 42%; right: 6%; font-size: clamp(2rem, 5vw, 5rem); color: var(--yellow, #ffd75e); animation-delay: 1.5s; }
+    .object-note    { top: 34%; left: 30%; font-size: clamp(1.4rem, 3vw, 2.6rem); animation-delay: 2s; opacity: .8; }
+    .object-doodle  { bottom: 26%; left: 42%; font-size: clamp(1.4rem, 3vw, 2.4rem); animation-delay: 2.4s; opacity: .75; }
+
+    /* Objetos con imagen: se controlan con width */
+    .cosmos-object.has-img img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .object-scooter { top: 68%; left: 4%;   width: clamp(72px, 9vw, 150px); animation-delay: .5s;  opacity: 1; }
+    .object-tv      { top: 20%; left: 3%;   width: clamp(70px, 8.5vw, 145px); animation-delay: 1s;   opacity: 1; }
+    .object-fire    { bottom: 8%; right: 12%; width: clamp(48px, 6vw, 100px); animation-delay: .8s;  opacity: 1; }
+    .object-smile   { top: 56%; left: 14%;  width: clamp(56px, 6.5vw, 110px); animation-delay: 1.2s; opacity: .95; }
+    .object-bowlcut { top: 6%;  left: 30%;  width: clamp(64px, 8vw, 135px); animation-delay: 2.8s; opacity: .95; }
+    .object-jacket  { bottom: 10%; left: 22%; width: clamp(60px, 7.5vw, 125px); animation-delay: 1.9s; opacity: .95; }
+    .object-pants   { top: 46%; right: 22%; width: clamp(48px, 6vw, 100px); animation-delay: 2.2s; opacity: .9; }
+
+    /* Delays del juego extra, para que no floten sincronizados con sus gemelos */
+    .m-tv     { animation-delay: 1.7s; }
+    .m-happy  { animation-delay: 2.5s; }
+    .m-fire   { animation-delay: 3.1s; }
+    .m-oli    { animation-delay: .7s; }
+    .m-jacket { animation-delay: 3.6s; }
+    .m-pants  { animation-delay: 1.3s; }
+    .m-pat    { animation-delay: 2.9s; }
+
+    /* Juego central: ritmos más lentos y desfasados */
+    .c-pat    { animation-duration: 9s;  animation-delay: .4s; }
+    .c-tv     { animation-duration: 11s; animation-delay: 2.1s; }
+    .c-happy  { animation-duration: 8s;  animation-delay: 3.4s; }
+    .c-oli    { animation-duration: 10s; animation-delay: 1.2s; }
+    .c-jacket { animation-duration: 12s; animation-delay: 2.8s; }
+    .c-fire   { animation-duration: 7.5s; animation-delay: 4s; }
+    .c-pants  { animation-duration: 10.5s; animation-delay: 1.7s; }
+
+    @keyframes floatCosmos {
+      0%, 100% { translate: 0 0; }
+      50%      { translate: 0 -18px; }
+    }
+
+    /* ===== ESTRELLAS DE NEÓN ===== */
+    .neon-stars {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .neon-star {
+      position: absolute;
+      display: block;
+      width: var(--s, 18px);
+      aspect-ratio: 1;
+      background: var(--c, #18c8ff);
+      /* Estrella de 4 puntas hecha con clip-path */
+      clip-path: polygon(
+        50% 0%, 60% 35%, 100% 50%, 60% 65%,
+        50% 100%, 40% 65%, 0% 50%, 40% 35%
+      );
+      filter:
+        drop-shadow(0 0 6px var(--c, #18c8ff))
+        drop-shadow(0 0 16px var(--c, #18c8ff));
+      opacity: .85;
+      animation: neonTwinkle var(--d, 3.2s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+    @keyframes neonTwinkle {
+      0%, 100% { opacity: .25; transform: scale(.82) rotate(0deg); }
+      50%      { opacity: 1;   transform: scale(1.18) rotate(12deg); }
+    }
+
+    /* Cada estrella con su color, tamaño, posición y ritmo */
+    .ns-1  { --c: #18c8ff; --s: 22px; --d: 3.4s; --delay: 0s;   top: 8%;  left: 18%; }
+    .ns-2  { --c: #ff2aa3; --s: 16px; --d: 2.8s; --delay: .6s;  top: 16%; right: 22%; }
+    .ns-3  { --c: #a7ff3c; --s: 13px; --d: 4.1s; --delay: 1.2s; top: 30%; left: 8%; }
+    .ns-4  { --c: #ffe14d; --s: 19px; --d: 3.6s; --delay: .3s;  top: 38%; right: 12%; }
+    .ns-5  { --c: #b388ff; --s: 14px; --d: 3s;   --delay: 1.8s; top: 52%; left: 26%; }
+    .ns-6  { --c: #18c8ff; --s: 12px; --d: 4.4s; --delay: 2.2s; top: 62%; right: 28%; }
+    .ns-7  { --c: #ff7a1a; --s: 17px; --d: 3.1s; --delay: .9s;  top: 74%; left: 12%; }
+    .ns-8  { --c: #ff2aa3; --s: 13px; --d: 3.9s; --delay: 1.5s; bottom: 12%; right: 18%; }
+    .ns-9  { --c: #5ae9ff; --s: 20px; --d: 2.6s; --delay: 2.6s; bottom: 6%;  left: 34%; }
+    .ns-10 { --c: #a7ff3c; --s: 15px; --d: 3.7s; --delay: .45s; top: 4%;  left: 46%; }
+    .ns-11 { --c: #ffe14d; --s: 11px; --d: 4.6s; --delay: 3s;   top: 46%; left: 4%; }
+    .ns-12 { --c: #b388ff; --s: 18px; --d: 2.9s; --delay: 1.1s; bottom: 30%; right: 6%; }
+
+    /* Con la música encendida brillan un poco más */
+    body.music-on .neon-star { animation-duration: 1.8s; opacity: 1; }
+
+    @media (max-width: 768px) {
+      .neon-star { --s: 12px !important; opacity: .7; }
+      .ns-1  { --s: 15px !important; }
+      .ns-4  { --s: 14px !important; }
+      .ns-9  { --s: 14px !important; }
+      .ns-5, .ns-6 { display: none; }
+    }
+
+    /* El contenido siempre por encima del universo */
+    .site-content { position: relative; z-index: 1; }
+    .site-content > header,
+    .site-content > main,
+    .site-content > footer,
+    .site-content section { position: relative; z-index: 1; }
+
+    /* Superficie clara sobre el universo (secciones formales) */
+    .light-over-cosmos {
+      color: #07122f;
+      background: rgba(255, 250, 242, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
+      border-radius: 34px;
+    }
+
+    /* El segundo juego de objetos solo existe en móvil */
+    .cosmos-object.only-mobile { display: none; }
+
+    /* Móvil: se ven todos los objetos (y un juego extra), más chicos y
+       repartidos en dos columnas laterales para no estorbar la lectura */
+    @media (max-width: 768px) {
+      .cosmos-object { opacity: .85; }
+      .cosmos-object.only-mobile { display: block; }
+
+      /* Reparto disperso por toda la pantalla: se resetean las posiciones
+         de escritorio para que ninguna quede anclada a un costado */
+      .cosmos-object { top: auto; bottom: auto; left: auto; right: auto; }
+
+      /* SVG (se controlan con font-size) */
+      .object-glasses { top: 2%;  left: 68%; font-size: 1.5rem; }
+      .object-bolt    { top: 40%; left: 88%; font-size: 1.8rem; }
+      .object-note    { top: 63%; left: 40%; font-size: 1.15rem; }
+      .object-doodle  { top: 96%; left: 30%; font-size: 1.1rem; }
+
+      /* Imágenes dispersas, alternando lados y zonas centrales */
+      .object-tv      { top: 5%;  left: 6%;  width: 48px; }
+      .m-oli          { top: 8%;  left: 44%; width: 38px; opacity: .7; }
+      .c-pat          { top: 15%; left: 22%; width: 42px; opacity: .55; }
+      .object-jacket  { top: 18%; left: 76%; width: 44px; }
+      .m-fire         { top: 23%; left: 52%; width: 30px; opacity: .55; }
+      .object-smile   { top: 27%; left: 4%;  width: 42px; }
+      .c-fire         { top: 31%; left: 68%; width: 30px; opacity: .5; }
+      .c-tv           { top: 35%; left: 34%; width: 36px; opacity: .5; }
+      .m-jacket       { top: 45%; left: 8%;  width: 38px; opacity: .7; }
+      .c-happy        { top: 49%; left: 46%; width: 34px; opacity: .5; }
+      .object-pants   { top: 53%; left: 78%; width: 38px; }
+      .object-bowlcut { top: 58%; left: 16%; width: 46px; }
+      .c-oli          { top: 61%; left: 58%; width: 38px; opacity: .55; }
+      .c-pants        { top: 68%; left: 4%;  width: 30px; opacity: .5; }
+      .m-tv           { top: 71%; left: 74%; width: 42px; opacity: .7; }
+      .m-happy        { top: 76%; left: 30%; width: 36px; opacity: .7; }
+      .c-jacket       { top: 80%; left: 52%; width: 34px; opacity: .5; }
+      .object-fire    { top: 83%; left: 80%; width: 38px; }
+      .m-pants        { top: 87%; left: 14%; width: 32px; opacity: .7; }
+      .m-pat          { top: 90%; left: 46%; width: 40px; opacity: .7; }
+      .object-scooter { top: 93%; left: 68%; width: 46px; }
+    }
+
+    /* Pantallas muy angostas: todo un paso más chico y algo más tenue */
+    @media (max-width: 420px) {
+      .cosmos-object { opacity: .8; }
+      .object-tv, .object-bowlcut, .object-scooter { width: 38px; }
+      .object-smile, .object-jacket { width: 34px; }
+      .object-pants, .object-fire   { width: 30px; }
+      .m-tv, .m-pat         { width: 34px; }
+      .m-oli, .m-jacket, .m-happy { width: 30px; }
+      .m-fire, .m-pants     { width: 24px; }
+      .c-pat, .c-oli        { width: 30px; }
+      .c-tv, .c-jacket, .c-happy { width: 26px; }
+      .c-fire, .c-pants     { width: 22px; }
+    }
+
+    /* Tipografía / titulares */
+    .display-hero {
+      font-weight: 900;
+      line-height: .98;
+      font-size: clamp(2.6rem, 9vw, 6rem);
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, var(--bk-yellow), var(--bk-pink), var(--bk-blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 30px rgba(255,42,163,.25);
+    }
+    .section-title {
+      font-weight: 900;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      letter-spacing: -.5px;
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .28em;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .glass {
+      background: rgba(23, 12, 56, .55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+
+    .badge-bk {
+      display: inline-block;
+      padding: .5rem 1.1rem;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      background: linear-gradient(90deg, var(--bk-pink), var(--bk-purple));
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(255,42,163,.4);
+    }
+
+    /* Botones */
+    .btn-bk {
+      border-radius: 999px;
+      font-weight: 800;
+      padding: .8rem 1.6rem;
+      border: 0;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn-bk:active { transform: scale(.97); }
+    .btn-yellow { background: var(--bk-yellow); color: #3a2a00; box-shadow: 0 10px 28px rgba(255,225,77,.35); }
+    .btn-yellow:hover { background: #ffd400; color:#3a2a00; transform: translateY(-2px); }
+    .btn-pink { background: var(--bk-pink); color:#fff; box-shadow: 0 10px 28px rgba(255,42,163,.4); }
+    .btn-pink:hover { background:#ff139a; color:#fff; transform: translateY(-2px); }
+    .btn-blue { background: var(--bk-blue); color:#052b3a; box-shadow:0 10px 28px rgba(24,200,255,.4); }
+    .btn-blue:hover { background:#00bff0; color:#052b3a; transform: translateY(-2px); }
+    .btn-outline-bk {
+      border-radius:999px; font-weight:800; padding:.8rem 1.6rem;
+      border:2px solid rgba(255,255,255,.5); color:#fff; background:transparent;
+    }
+    .btn-outline-bk:hover { background:rgba(255,255,255,.12); color:#fff; }
+
+    /* Focus visible accesible */
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid var(--bk-yellow);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    /* HERO avatar */
+    .avatar-wrap { position: relative; display:inline-block; }
+    .halo {
+      position:absolute; top:-6%; left:50%; transform:translateX(-50%);
+      width:60%; height:22px; border-radius:50%;
+      background: radial-gradient(ellipse at center, rgba(255,225,77,.95), rgba(255,225,77,0) 70%);
+      box-shadow:0 0 30px 8px rgba(255,225,77,.6);
+      animation: haloPulse 3.5s ease-in-out infinite;
+    }
+    @keyframes haloPulse { 0%,100%{opacity:.7; transform:translateX(-50%) scale(1);} 50%{opacity:1; transform:translateX(-50%) scale(1.08);} }
+    .avatar-svg { width: clamp(220px, 60vw, 340px); height:auto; filter: drop-shadow(0 20px 40px rgba(0,0,0,.45)); }
+
+    /* Cuenta regresiva */
+    .count-box {
+      background: rgba(11,5,36,.6);
+      border: 2px solid rgba(24,200,255,.4);
+      border-radius: 18px;
+      padding: 1rem .5rem;
+      text-align:center;
+      box-shadow: 0 0 24px rgba(24,200,255,.25), inset 0 0 18px rgba(106,44,224,.25);
+    }
+    .count-num {
+      font-weight: 900;
+      font-size: clamp(1.8rem, 8vw, 3.4rem);
+      line-height: 1;
+      color: var(--bk-yellow);
+      text-shadow: 0 0 14px rgba(255,225,77,.6);
+      font-variant-numeric: tabular-nums;
+    }
+    .count-label { text-transform:uppercase; letter-spacing:.15em; font-size:.72rem; opacity:.8; margin-top:.35rem; }
+
+    /* Sección Eucaristía (superficie clara sobre el universo) */
+    .euca { color: #2b2550; }
+    .euca-card {
+      background: #ffffff;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(60, 40, 110, .16), 0 4px 12px rgba(60, 40, 110, .06);
+      border: 1px solid rgba(120, 100, 170, .10);
+    }
+    /* Panel izquierdo: degradado claro + resplandor ámbar detrás del ícono */
+    .euca-icon-side {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      background: linear-gradient(150deg, #fffdf7 0%, #f7f6fb 55%, #eef3fb 100%);
+      border-right: 1px solid rgba(120, 100, 170, .10);
+    }
+    .euca-icon-side::before {
+      content: "";
+      position: absolute;
+      width: 68%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(251, 211, 77, .40) 0%, rgba(251, 211, 77, .18) 45%, rgba(251, 211, 77, 0) 72%);
+      filter: blur(2px);
+    }
+    .euca-church {
+      position: relative;
+      width: clamp(110px, 16vw, 150px);
+      height: auto;
+    }
+    .euca-label {
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-size: .74rem;
+      font-weight: 700;
+      color: #9a99b5;
+      margin-bottom: .18rem;
+    }
+    .euca-value {
+      font-weight: 700;
+      font-size: 1.06rem;
+      color: #2b2550;
+      letter-spacing: -.01em;
+    }
+    /* Botón amarillo sólido, sin glow */
+    .btn-euca {
+      background: #fbd34d;
+      color: #2b2550;
+      border: 0;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1.02rem;
+      padding: .95rem 1.5rem;
+      box-shadow: 0 6px 18px rgba(251, 211, 77, .35);
+      transition: background .16s ease, transform .16s ease;
+    }
+    .btn-euca:hover { background: #f9c92c; color: #2b2550; transform: translateY(-1px); }
+    .btn-euca:active { transform: translateY(0); }
+    .euca .eyebrow { color: var(--bk-purple); }
+    .euca .section-title { color: var(--bk-ink); }
+
+    /* Cards temáticas / familia */
+    .theme-card, .fam-card {
+      background: rgba(23,12,56,.55);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:22px;
+      padding:1.6rem;
+      height:100%;
+      transition: transform .18s ease, box-shadow .18s ease;
+      backdrop-filter: blur(8px);
+    }
+    .theme-card:hover { transform: translateY(-6px) rotate(-1deg); box-shadow:0 18px 40px rgba(255,42,163,.25); }
+    .fam-card:hover { transform: translateY(-4px); box-shadow:0 18px 40px rgba(24,200,255,.2); }
+    .theme-ico {
+      width:64px; height:64px; border-radius:16px; display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, var(--bk-pink), var(--bk-purple));
+      margin-bottom:1rem;
+    }
+
+    /* Lentes rojos dibujados: no dependen del emoji del sistema */
+    .ico-lentes {
+      width: 1.5em;
+      height: auto;
+      vertical-align: -0.18em;
+      filter: drop-shadow(0 2px 6px rgba(255,59,59,.45));
+    }
+    .sticker-tape {
+      position:absolute; top:-10px; left:50%; transform:translateX(-50%) rotate(-3deg);
+      background: rgba(255,225,77,.7); color:#3a2a00; font-weight:800; font-size:.7rem;
+      padding:.15rem .7rem; border-radius:4px;
+    }
+
+    /* Fiesta section energética */
+    .fiesta { position:relative; }
+    .fiesta .party-blob {
+      position:absolute; inset:0; z-index:-1; border-radius:32px;
+      background: radial-gradient(600px 300px at 20% 20%, rgba(255,42,163,.3), transparent 60%),
+                  radial-gradient(600px 300px at 80% 80%, rgba(24,200,255,.3), transparent 60%);
+    }
+
+    /* RSVP */
+    .form-control-bk {
+      border-radius:14px; border:2px solid rgba(255,255,255,.2);
+      background: rgba(11,5,36,.5); color:#fff; padding:.85rem 1rem;
+    }
+    .form-control-bk::placeholder { color: rgba(255,255,255,.5); }
+    .form-control-bk:focus { background: rgba(11,5,36,.7); color:#fff; border-color: var(--bk-yellow); box-shadow:none; }
+
+    .status-msg { min-height: 1.4rem; font-weight:700; }
+    .copy-fallback {
+      white-space: pre-wrap; background: rgba(11,5,36,.7); border:1px dashed rgba(255,255,255,.3);
+      border-radius:14px; padding:1rem; font-size:.9rem; color:#fff;
+    }
+
+    /* Halo del footer: centrado real, sin el translateX del halo absoluto */
+    .footer-halo {
+      display: block;
+      width: 140px;
+      height: 24px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(255,225,77,.95), rgba(255,225,77,0) 70%);
+      box-shadow: 0 0 30px 8px rgba(255,225,77,.6);
+      animation: footerHaloPulse 3.5s ease-in-out infinite;
+    }
+    @keyframes footerHaloPulse {
+      0%, 100% { opacity: .7; transform: scale(1); }
+      50%      { opacity: 1;  transform: scale(1.08); }
+    }
+
+    /* Footer scooter: carril propio debajo del texto */
+    .footer-wrap { position:relative; overflow:hidden; padding-top:3rem; }
+    .scooter-lane {
+      position: relative;
+      height: 62px;
+      margin-top: 1.25rem;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .scooter-run {
+      position: absolute;
+      bottom: 0;
+      left: -120px;
+      width: 62px;
+      animation: cross 14s linear infinite;
+    }
+    .scooter-run img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    @keyframes cross { 0%{ transform: translateX(0);} 100%{ transform: translateX(calc(100vw + 160px)); } }
+
+    .divider-doodle { height:2px; background: repeating-linear-gradient(90deg, var(--bk-yellow) 0 10px, transparent 10px 20px); opacity:.5; border:0; }
+
+    /* ===================== HERO PÓSTER ESPACIAL ===================== */
+    :root {
+      --space-dark: #07091f;
+      --pink: #ff4f93;
+      --yellow: #ffd75e;
+      --white: #fffaf2;
+      --muted: #d8d7ef;
+      --border: rgba(255, 255, 255, 0.2);
+    }
+
+    /* El skip link no debe verse hasta que se navegue con teclado */
+    .skip-link {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 9999;
+      transform: translateY(-250%);
+      background: #fff;
+      color: #08091f;
+      padding: 0.8rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+      transition: transform 160ms ease;
+    }
+    .skip-link:focus,
+    .skip-link:focus-visible { transform: translateY(0); }
+
+    /* El hero ya no lleva fondo propio: deja ver el universo global */
+    .hero-bekojito {
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      background: transparent;
+    }
+
+    .hero-copy { max-width: 760px; position: relative; z-index: 2; }
+
+    /* Botón de música en la parte superior del hero */
+    .hero-music-top {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.3rem;
+    }
+    .hero-music-top .hero-btn-music {
+      min-height: 60px;
+      padding: .85rem 1.6rem;
+      font-size: 1.05rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+    }
+    /* Pista de texto al lado, para que se note que hay música */
+    .music-hint {
+      font-size: .88rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      color: #ffe14d;
+      text-shadow: 0 2px 10px rgba(0,0,0,.4);
+      animation: hintBlink 2.6s ease-in-out infinite;
+    }
+    @keyframes hintBlink {
+      0%, 100% { opacity: .55; }
+      50%      { opacity: 1; }
+    }
+
+    /* Barras tipo ecualizador dentro del botón */
+    .music-eq {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 20px;
+    }
+    .music-eq i {
+      display: block;
+      width: 4px;
+      height: 7px;
+      border-radius: 2px;
+      background: #fff;
+    }
+    body.music-on .music-eq i { animation: eqBar .9s ease-in-out infinite; }
+    body.music-on .music-eq i:nth-child(2) { animation-delay: .15s; }
+    body.music-on .music-eq i:nth-child(3) { animation-delay: .3s; }
+    body.music-on .music-eq i:nth-child(4) { animation-delay: .45s; }
+    @keyframes eqBar {
+      0%, 100% { height: 7px; }
+      50%      { height: 20px; }
+    }
+
+    .cherry-sign {
+      display: inline-block;
+      margin-left: 4rem;
+      margin-bottom: -0.4rem;
+      padding: 0.45rem 1.2rem;
+      transform: rotate(5deg);
+      border: 3px solid #05071a;
+      border-radius: 0.45rem;
+      background: #2d86ff;
+      color: #fff;
+      font-size: clamp(0.9rem, 1.4vw, 1.25rem);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-shadow: 2px 2px 0 #111;
+      box-shadow: 0 10px 0 rgba(0,0,0,0.25);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 1.6rem;
+      padding: 0.75rem 1.4rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-title {
+      margin: 0;
+      text-transform: uppercase;
+      line-height: 0.86;
+      letter-spacing: -0.05em;
+      font-weight: 900;
+      text-shadow: 0 12px 0 rgba(0, 0, 0, 0.18);
+    }
+    .hero-title span, .hero-title strong { display: block; }
+    .hero-title span { color: #fff; font-size: clamp(3rem, 8.4vw, 8.2rem); }
+    .hero-title strong { color: var(--yellow); font-size: clamp(2.8rem, 8vw, 7.8rem); }
+
+    .hero-subtitle {
+      max-width: 760px;
+      margin-top: 1.4rem;
+      margin-bottom: 1.8rem;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.5vw, 1.45rem);
+      line-height: 1.55;
+    }
+
+    .hero-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+    .hero-info-card {
+      padding: 1.1rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.16);
+      backdrop-filter: blur(10px);
+    }
+    .hero-info-card small {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: rgba(255, 255, 255, 0.63);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+    .hero-info-card b { color: #fff; font-size: 1rem; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .hero-btn {
+      min-height: 58px;
+      padding: 0.95rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 900;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+    .hero-btn:hover { transform: translateY(-3px); }
+    .hero-btn-primary {
+      background: linear-gradient(135deg, #ff4f93, #ff7165);
+      color: #fff;
+      box-shadow: 0 18px 35px rgba(255, 79, 147, 0.28);
+    }
+    .hero-btn-primary:hover { color: #fff; }
+    .hero-btn-light { background: #fff; color: #21164d; }
+    .hero-btn-light:hover { color: #21164d; }
+    .hero-btn-outline { background: rgba(255, 255, 255, 0.07); color: #fff; }
+    .hero-btn-outline:hover { background: rgba(255, 255, 255, 0.16); color: #fff; }
+
+    /* Botón de música (opt-in) */
+    .hero-btn-music {
+      position: relative;
+      isolation: isolate;
+      background: linear-gradient(135deg, #18c8ff, #7b2cff);
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.45);
+      box-shadow:
+        0 14px 32px rgba(24, 200, 255, .45),
+        0 0 0 0 rgba(24, 200, 255, .55);
+    }
+    .hero-btn-music:hover { color: #fff; box-shadow: 0 20px 44px rgba(24, 200, 255, .6); }
+
+    /* Anillo pulsante: solo mientras la canción NO está activada */
+    .hero-btn-music[aria-pressed="false"]::before {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 999px;
+      border: 2px solid rgba(24, 200, 255, .8);
+      z-index: -1;
+      animation: musicRing 2s ease-out infinite;
+    }
+    .hero-btn-music[aria-pressed="false"] {
+      animation: musicAttention 2.6s ease-in-out infinite;
+    }
+    .hero-btn-music[aria-pressed="true"] {
+      background: linear-gradient(135deg, #ff2aa3, #7b2cff);
+      box-shadow: 0 16px 36px rgba(255, 42, 163, .45);
+    }
+    .hero-btn-music:disabled { opacity: .6; cursor: not-allowed; animation: none; }
+    .hero-btn-music:disabled::before { display: none; }
+
+    @keyframes musicRing {
+      0%   { transform: scale(1);    opacity: .9; }
+      100% { transform: scale(1.28); opacity: 0; }
+    }
+    @keyframes musicAttention {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.045); }
+    }
+
+    /* Modo fiesta: se activa solo mientras suena la canción */
+    body.music-on .global-cosmos { filter: saturate(1.2) brightness(1.08); }
+    body.music-on .cosmos-object { animation-duration: 4.5s; }
+    body.music-on .hero-btn-music { animation: musicPulse 1.6s ease-in-out infinite; }
+    @keyframes musicPulse {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-2px) scale(1.02); }
+    }
+
+    /* Botón de confetti: el más llamativo del hero */
+    .hero-btn-confetti {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border: 0;
+      color: #2b1a00;
+      background: linear-gradient(100deg, #ffe14d, #a7ff3c, #18c8ff, #ff2aa3, #ffe14d);
+      background-size: 300% 100%;
+      box-shadow:
+        0 12px 30px rgba(255, 225, 77, .40),
+        0 0 0 3px rgba(255, 255, 255, .18) inset;
+      animation: confettiShift 6s linear infinite, confettiPulse 2.4s ease-in-out infinite;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+    }
+    .hero-btn-confetti:hover {
+      color: #2b1a00;
+      transform: translateY(-3px) scale(1.03);
+      box-shadow:
+        0 18px 44px rgba(255, 225, 77, .55),
+        0 0 0 3px rgba(255, 255, 255, .28) inset;
+      animation-play-state: running, paused;
+    }
+    /* Brillo que barre el botón */
+    .hero-btn-confetti::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -60%;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,.75), transparent);
+      transform: skewX(-18deg);
+      animation: confettiShine 3.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .hero-btn-confetti .btn-emoji {
+      font-size: 1.25em;
+      line-height: 1;
+      animation: emojiWiggle 2.4s ease-in-out infinite;
+    }
+    @keyframes confettiShift {
+      from { background-position: 0% 50%; }
+      to   { background-position: 300% 50%; }
+    }
+    @keyframes confettiPulse {
+      0%, 100% { box-shadow: 0 12px 30px rgba(255, 225, 77, .40), 0 0 0 3px rgba(255,255,255,.18) inset; }
+      50%      { box-shadow: 0 12px 42px rgba(255, 42, 163, .55), 0 0 0 3px rgba(255,255,255,.30) inset; }
+    }
+    @keyframes confettiShine {
+      0%        { left: -60%; }
+      55%, 100% { left: 130%; }
+    }
+    @keyframes emojiWiggle {
+      0%, 100% { transform: rotate(-12deg) scale(1); }
+      50%      { transform: rotate(12deg) scale(1.15); }
+    }
+
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+
+    .poster-frame {
+      position: relative;
+      width: min(100%, 640px);
+      padding: clamp(0.65rem, 1.3vw, 1rem);
+      border: 16px solid rgba(124, 101, 184, 0.55);
+      border-radius: 2.2rem;
+      background: rgba(10, 8, 33, 0.7);
+      box-shadow:
+        0 35px 90px rgba(0, 0, 0, 0.38),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+      transform: rotate(0.5deg);
+    }
+    .bekojito-img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 0.94;
+      object-fit: cover;
+      border-radius: 1.35rem;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+    }
+
+    .poster-sticker {
+      position: absolute;
+      z-index: 3;
+      padding: 0.65rem 1.1rem;
+      border: 3px solid #0b0820;
+      border-radius: 0.6rem;
+      color: #130a2b;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      box-shadow: 0 10px 0 rgba(0, 0, 0, 0.22);
+    }
+    .sticker-mode { right: -1.2rem; bottom: 3.2rem; background: var(--yellow); transform: rotate(-4deg); }
+    .sticker-bowl { right: 5.5rem; bottom: -2.4rem; background: var(--pink); color:#fff; transform: rotate(-7deg); }
+
+    .poster-bubble {
+      position: absolute;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+    }
+    .bubble-one { width: 40px; height: 40px; right: -42px; top: 40px; }
+    .bubble-two { width: 26px; height: 26px; left: -30px; bottom: 40px; }
+
+    /* Responsive del hero */
+    @media (max-width: 991.98px) {
+      .hero-bekojito { text-align: center; }
+      .hero-copy { margin-inline: auto; }
+      .cherry-sign { margin-left: 0; }
+      .hero-music-top .hero-btn-music { width: auto; }
+      .hero-info-grid { grid-template-columns: 1fr; }
+      .hero-actions { justify-content: center; }
+      .hero-btn { width: min(100%, 320px); }
+      .poster-frame { max-width: 520px; border-width: 10px; }
+      .sticker-mode { right: 0.4rem; bottom: 2rem; }
+      .sticker-bowl { right: 3rem; bottom: -1.7rem; }
+    }
+    @media (max-width: 575.98px) {
+      .hero-bekojito .row { min-height: auto !important; padding-top: 4rem !important; }
+      .hero-title span { font-size: clamp(2.6rem, 15vw, 5rem); }
+      .hero-title strong { font-size: clamp(2.3rem, 13.5vw, 4.5rem); }
+      .hero-subtitle { font-size: 1rem; }
+      .hero-badge { font-size: 0.72rem; padding: 0.65rem 1rem; }
+      .poster-sticker { font-size: 0.78rem; }
+      .bubble-one, .bubble-two { display: none; }
+    }
+
+    /* ===================== POSDATA / NOTITA DE REGALOS ===================== */
+    .gift-note-section { position: relative; z-index: 1; }
+
+    /* Nota crema con marco punteado */
+    .gift-note-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(1.5rem, 3.2vw, 2.6rem) clamp(1.3rem, 3.2vw, 2.8rem) clamp(1rem, 2vw, 1.6rem);
+      border-radius: 2.4rem;
+      background: linear-gradient(160deg, #fdf9f0 0%, #f7f0e0 55%, #fdf7ee 100%);
+      color: #1b1b4b;
+      box-shadow:
+        0 20px 0 rgba(0, 0, 0, 0.16),
+        0 40px 90px rgba(0, 0, 0, 0.35);
+    }
+    .gift-note-card::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 2px dashed rgba(27, 27, 75, 0.28);
+      border-radius: 1.7rem;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .gift-note-badge {
+      position: relative;
+      z-index: 4;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: .9rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      background: linear-gradient(100deg, #ff2f9a, #e0177f);
+      color: #fff;
+      font-size: clamp(.68rem, 1.1vw, .82rem);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      box-shadow: 0 6px 16px rgba(224, 23, 127, .35);
+    }
+    .gift-note-badge .ico-star { width: 1.1em; height: auto; }
+
+    .gift-note-card h2 {
+      position: relative;
+      z-index: 4;
+      margin-bottom: .9rem;
+      color: #1b1b4b;
+      font-size: clamp(1.9rem, 6vw, 4.4rem);
+      font-weight: 900;
+      line-height: 0.92;
+      text-transform: uppercase;
+      letter-spacing: -0.035em;
+    }
+    .gift-note-card p {
+      position: relative;
+      z-index: 4;
+      max-width: 780px;
+      margin-bottom: 0.8rem;
+      font-size: clamp(.98rem, 1.5vw, 1.16rem);
+      font-weight: 600;
+      line-height: 1.6;
+      color: #24244f;
+    }
+    .gift-note-card strong { color: #e5197f; font-weight: 900; }
+
+    /* Los tres juguetes en fila al pie de la nota */
+    .gift-toys {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(.4rem, 2.5vw, 2rem);
+      margin-top: clamp(.4rem, 1.4vw, 1rem);
+    }
+    .gift-toys .toy {
+      display: block;
+      height: auto;
+      pointer-events: none;
+      user-select: none;
+      filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.22));
+      animation: giftFloat 5s ease-in-out infinite;
+    }
+    .toy-water {
+      width: clamp(96px, 20vw, 215px);
+      transform: rotate(-6deg);
+    }
+    .toy-car {
+      width: clamp(112px, 24vw, 255px);
+      animation-delay: 1.1s;
+    }
+    .toy-legos {
+      width: clamp(72px, 15vw, 160px);
+      animation-delay: 2.2s;
+    }
+
+    @keyframes giftFloat {
+      0%, 100% { translate: 0 0; }
+      50%      { translate: 0 -12px; }
+    }
+
+    @media (max-width: 768px) {
+      .gift-note-card { padding: 1.5rem 1.15rem 1.1rem; }
+      .gift-note-card::before { inset: 9px; }
+      .gift-toys { gap: .3rem; }
+    }
+
+    /* ACCESIBILIDAD: respetar prefers-reduced-motion en todo el sitio */
+    @media (prefers-reduced-motion: reduce) {
+      body.music-on .hero-btn-music,
+      .hero-btn-music,
+      .hero-btn-music::before,
+      .music-hint,
+      .music-eq i { animation: none !important; }
+      .cosmos-stars,
+      .cosmos-object,
+      .neon-star,
+      .halo,
+      .footer-halo,
+      .gift-toys .toy,
+      .scooter-run,
+      .hero-btn-confetti,
+      .hero-btn-confetti::after,
+      .hero-btn-confetti .btn-emoji { animation: none !important; }
+      .hero-btn-confetti::after { display: none; }
+      .hero-btn { transition: none; }
+      .hero-btn:hover { transform: none; }
+      * { scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FONDO UNIVERSO GLOBAL -->
+  <div class="global-cosmos" aria-hidden="true">
+    <div class="cosmos-stars stars-a"></div>
+    <div class="cosmos-stars stars-b"></div>
+    <div class="cosmos-stars stars-c"></div>
+
+    <!-- Objetos Oliver Tree-inspired: SVG propios, sin material con copyright.
+         Se dimensionan en "em" para que el font-size con clamp siga controlando su tamaño. -->
+
+    <!-- Lentes rojos -->
+    <div class="cosmos-object object-glasses">
+      <svg width="2.4em" height="1.1em" viewBox="0 0 90 40" fill="none">
+        <rect x="6" y="8" width="30" height="22" rx="7" stroke="#ff3b3b" stroke-width="6"/>
+        <rect x="52" y="8" width="30" height="22" rx="7" stroke="#ff3b3b" stroke-width="6"/>
+        <line x1="36" y1="18" x2="52" y2="18" stroke="#ff3b3b" stroke-width="6"/>
+      </svg>
+    </div>
+
+    <!-- Patín / scooter -->
+    <div class="cosmos-object object-scooter has-img">
+      <img src="Pat.png" alt="" loading="lazy" />
+    </div>
+
+    <!-- TV retro -->
+    <div class="cosmos-object object-tv has-img">
+      <img src="tv.png" alt="" loading="lazy" />
+    </div>
+
+    <!-- Rayo -->
+    <div class="cosmos-object object-bolt">
+      <svg width="0.8em" height="1.2em" viewBox="0 0 46 70">
+        <path d="M26 2 L6 40 L22 40 L18 68 L40 26 L24 26 Z" fill="#ffd75e" stroke="#ffb300" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <!-- Fuego cartoon -->
+    <div class="cosmos-object object-fire has-img">
+      <img src="Fire.png" alt="" loading="lazy" />
+    </div>
+
+    <!-- Carita feliz -->
+    <div class="cosmos-object object-smile has-img">
+      <img src="happy.png" alt="" loading="lazy" />
+    </div>
+
+    <!-- Bowl cut -->
+    <div class="cosmos-object object-bowlcut has-img">
+      <img src="oli.png" alt="" loading="lazy" />
+    </div>
+
+    <!-- Chamarra retro -->
+    <div class="cosmos-object object-jacket has-img">
+      <img src="Jacket.png" alt="" loading="lazy" />
+    </div>
+
+    <!-- Pantalones anchos -->
+    <div class="cosmos-object object-pants has-img">
+      <img src="Pant.png" alt="" loading="lazy" />
+    </div>
+
+    <!-- Nota musical -->
+    <div class="cosmos-object object-note">
+      <svg width="0.9em" height="1.1em" viewBox="0 0 40 50">
+        <ellipse cx="13" cy="40" rx="10" ry="7.5" fill="#5ae9ff" transform="rotate(-18 13 40)"/>
+        <rect x="21" y="6" width="4.5" height="34" fill="#5ae9ff"/>
+        <path d="M25.5 6 Q37 9 37 19 Q33 12 25.5 14 Z" fill="#5ae9ff"/>
+      </svg>
+    </div>
+
+    <!-- Estrella tipo dibujo manual -->
+    <div class="cosmos-object object-doodle">
+      <svg width="1em" height="1em" viewBox="0 0 40 40">
+        <path d="M20 2 L25 15 L39 15 L28 24 L32 38 L20 29 L8 38 L12 24 L1 15 L15 15 Z"
+              fill="none" stroke="#a7ff3c" stroke-width="3" stroke-linejoin="round" stroke-dasharray="5 4"/>
+      </svg>
+    </div>
+
+    <!-- Segundo juego de objetos, solo visible en móvil para llenar el fondo -->
+    <div class="cosmos-object has-img only-mobile m-tv"><img src="tv.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile m-happy"><img src="happy.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile m-fire"><img src="Fire.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile m-oli"><img src="oli.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile m-jacket"><img src="Jacket.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile m-pants"><img src="Pant.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile m-pat"><img src="Pat.png" alt="" loading="lazy" /></div>
+
+    <!-- Tercer juego: objetos flotando en la zona central, más tenues -->
+    <div class="cosmos-object has-img only-mobile c-pat"><img src="Pat.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile c-tv"><img src="tv.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile c-happy"><img src="happy.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile c-oli"><img src="oli.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile c-jacket"><img src="Jacket.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile c-fire"><img src="Fire.png" alt="" loading="lazy" /></div>
+    <div class="cosmos-object has-img only-mobile c-pants"><img src="Pant.png" alt="" loading="lazy" /></div>
+
+    <!-- ESTRELLAS DE NEÓN de distintos colores -->
+    <div class="neon-stars">
+      <span class="neon-star ns-1"></span>
+      <span class="neon-star ns-2"></span>
+      <span class="neon-star ns-3"></span>
+      <span class="neon-star ns-4"></span>
+      <span class="neon-star ns-5"></span>
+      <span class="neon-star ns-6"></span>
+      <span class="neon-star ns-7"></span>
+      <span class="neon-star ns-8"></span>
+      <span class="neon-star ns-9"></span>
+      <span class="neon-star ns-10"></span>
+      <span class="neon-star ns-11"></span>
+      <span class="neon-star ns-12"></span>
+    </div>
+  </div>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- CONTENIDO SOBRE EL UNIVERSO -->
+  <div class="site-content">
+
+  <!-- HERO -->
+  <header class="hero-bekojito" id="inicio" aria-labelledby="hero-title">
+    <div class="container position-relative">
+      <div class="row align-items-center g-5 min-vh-100 py-5">
+
+        <!-- Columna de texto -->
+        <div class="col-12 col-lg-6">
+          <div class="hero-copy">
+
+            <!-- Botón de música arriba de todo, para que se vea desde el inicio -->
+            <div class="hero-music-top">
+              <button
+                type="button"
+                id="musicToggle"
+                class="btn hero-btn hero-btn-music"
+                aria-pressed="false"
+                aria-label="Activar canción"
+              >
+                <span class="music-eq" aria-hidden="true">
+                  <i></i><i></i><i></i><i></i>
+                </span>
+                <span class="music-label">Activar canción</span>
+              </button>
+              <span class="music-hint" aria-hidden="true">Sube el volumen 🔊</span>
+              <p id="musicStatus" class="visually-hidden" aria-live="polite"></p>
+            </div>
+
+
+            <span class="hero-badge">✦ PRESENTACIÓN DE 8 AÑOS</span>
+
+            <h1 class="hero-title" id="hero-title">
+              <span>¡Bek Jan</span>
+              <strong>TE INVITA!</strong>
+            </h1>
+
+            <p class="hero-subtitle">
+              Acompáñame a celebrar un día lleno de bendición, familia,
+              música, baile y una vibra retro muy divertida.
+            </p>
+
+            <div class="hero-info-grid">
+              <article class="hero-info-card">
+                <small>FECHA</small>
+                <b id="heroFecha">Sábado 8 de agosto de 2026</b>
+              </article>
+
+              <article class="hero-info-card">
+                <small>HORA</small>
+                <b id="heroHora">5:30 PM</b>
+              </article>
+
+             
+
+            <div class="hero-actions">
+              <a href="#rsvp" class="btn hero-btn hero-btn-primary">Confirmar asistencia</a>
+              <a href="#eucaristia" class="btn hero-btn hero-btn-light">Ver celebración</a>
+              <button class="btn hero-btn hero-btn-confetti" type="button" id="btnConfetti">
+                <span class="btn-emoji" aria-hidden="true">🎉</span>
+                ¡Lanzar confetti!
+              </button>
+
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna de imagen tipo póster -->
+        <div class="col-12 col-lg-6">
+          <div class="hero-visual">
+            <div class="poster-frame" id="bekojitoFrame">
+              <!-- Imagen local "bekojito.png". Si falta, se muestra el avatar SVG de respaldo. -->
+              <img
+                src="bekojito.png"
+                alt="Ilustración de Bek Jan con lentes rojos, halo y fondo espacial"
+                class="bekojito-img"
+                id="bekojitoImg"
+              />
+
+            
+
+              <div class="poster-bubble bubble-one" aria-hidden="true"></div>
+              <div class="poster-bubble bubble-two" aria-hidden="true"></div>
+            </div>
+
+            <!-- Avatar ilustrado SVG (respaldo si la imagen local no existe) -->
+        <svg class="avatar-svg d-none" id="bekojitoSvg" viewBox="0 0 320 340" role="img" aria-label="Ilustración de Bekojito con lentes rojos, corte bowl cut, halo y alas">
+          <!-- alas -->
+          <g opacity="0.95">
+            <path d="M60 190 C10 150 5 210 40 235 C15 235 30 275 70 258 C55 285 95 285 100 250 Z" fill="#ffffff" opacity="0.9"/>
+            <path d="M260 190 C310 150 315 210 280 235 C305 235 290 275 250 258 C265 285 225 285 220 250 Z" fill="#ffffff" opacity="0.9"/>
+          </g>
+          <!-- cuerpo / chamarra retro rosa-azul-morada -->
+          <path d="M110 250 Q160 230 210 250 L225 330 L95 330 Z" fill="#6a2ce0"/>
+          <path d="M110 250 Q135 245 160 246 L160 330 L95 330 Z" fill="#ff2aa3"/>
+          <path d="M160 246 Q185 245 210 250 L225 330 L160 330 Z" fill="#18c8ff"/>
+          <!-- cuello -->
+          <rect x="145" y="205" width="30" height="40" rx="12" fill="#f2c9a0"/>
+          <!-- cabeza -->
+          <circle cx="160" cy="160" r="62" fill="#f7d3ad"/>
+          <!-- bowl cut -->
+          <path d="M96 158 Q100 92 160 92 Q220 92 224 158 Q224 132 160 132 Q96 132 96 158 Z" fill="#3a2a1a"/>
+          <path d="M96 158 Q98 150 108 150 L212 150 Q222 150 224 158 L224 150 Q160 140 96 150 Z" fill="#3a2a1a"/>
+          <rect x="96" y="150" width="128" height="14" rx="6" fill="#3a2a1a"/>
+          <!-- lentes rojos -->
+          <g>
+            <rect x="112" y="158" width="42" height="30" rx="8" fill="none" stroke="#ff3b3b" stroke-width="7"/>
+            <rect x="166" y="158" width="42" height="30" rx="8" fill="none" stroke="#ff3b3b" stroke-width="7"/>
+            <line x1="154" y1="170" x2="166" y2="170" stroke="#ff3b3b" stroke-width="7"/>
+          </g>
+          <!-- sonrisa -->
+          <path d="M138 198 Q160 216 182 198" fill="none" stroke="#b5623a" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+  <!-- MENSAJE FAMILIAR -->
+  <section class="container py-5" id="mensaje">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9">
+        <div class="glass p-4 p-md-5 text-center position-relative">
+          <span class="halo" aria-hidden="true" style="top:-14px;"></span>
+          <p class="eyebrow mb-2" style="color:var(--bk-yellow)">Con mucho cariño ✨</p>
+          <h2 class="section-title mb-4">Un mensaje para ti</h2>
+          <p class="fs-5 mb-3" style="line-height:1.8; opacity:.95;">
+            Hola, ¿cómo estás? Soy <strong>Bek Jan Hernández Mendoza</strong> y es un placer invitarte
+            a ti y a tu apreciable familia a mi fiesta de presentación y mis 8 años.
+          </p>
+          <p class="fs-5 mb-3" style="line-height:1.8; opacity:.95;">
+            Mi familia y yo estamos agradecidos con Dios por este gran día. Esperamos nos puedas
+            acompañar con toda la actitud de diversión y baile.
+          </p>
+         
+          <p class="fs-5 mb-0" style="line-height:1.8; opacity:.95;">
+            Me despido deseándote que tengas una hermosa semana. 🌟
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CELEBRACIÓN EUCARÍSTICA -->
+  <section class="py-5" id="eucaristia">
+    <div class="container">
+      <!-- Superficie clara sobre el universo: lectura clara y tono respetuoso -->
+      <div class="euca light-over-cosmos p-4 p-md-5">
+      <div class="row align-items-center g-4">
+        <!-- Columna izquierda -->
+        <div class="col-12 col-lg-5">
+          <p class="eyebrow mb-2">Primero damos gracias</p>
+          <h2 class="section-title mb-3">Celebración eucarística</h2>
+          <p class="fs-5" style="color:#5c5273; line-height:1.7;">
+            Mi familia y yo estamos agradecidos con Dios por este gran día.
+            Nos encantará que nos acompañes en la celebración eucarística.
+          </p>
+        </div>
+
+        <!-- Columna derecha: card horizontal -->
+        <div class="col-12 col-lg-7">
+          <div class="euca-card">
+            <div class="row g-0">
+              <div class="col-12 col-md-5 euca-icon-side">
+                <!-- Ícono lineal de iglesia -->
+                <svg class="euca-church" viewBox="0 0 64 64" role="img" aria-label="Ícono de iglesia">
+                  <g fill="none" stroke="#2f1b63" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- cruz superior -->
+                    <line x1="32" y1="3" x2="32" y2="14"/>
+                    <line x1="26.5" y1="7.5" x2="37.5" y2="7.5"/>
+                    <!-- techo central -->
+                    <path d="M32 15 L20 26"/>
+                    <path d="M32 15 L44 26"/>
+                    <!-- muros del cuerpo central -->
+                    <line x1="20" y1="26" x2="20" y2="53"/>
+                    <line x1="44" y1="26" x2="44" y2="53"/>
+                    <!-- cruz de la fachada -->
+                    <line x1="32" y1="24" x2="32" y2="35"/>
+                    <line x1="27" y1="29.5" x2="37" y2="29.5"/>
+                    <!-- puerta con arco -->
+                    <path d="M26 53 L26 46 Q32 39 38 46 L38 53"/>
+                    <!-- alas laterales -->
+                    <path d="M20 33 L10 42 L10 53"/>
+                    <path d="M44 33 L54 42 L54 53"/>
+                    <!-- base -->
+                    <line x1="8" y1="53" x2="56" y2="53"/>
+                  </g>
+                </svg>
+              </div>
+              <div class="col-12 col-md-7 p-4 p-md-5">
+                <div class="mb-3">
+                  <div class="euca-label">DÍA</div>
+                  <div class="euca-value" id="eucaDia">Sábado 8 de agosto de 2026</div>
+                </div>
+                <div class="mb-3">
+                  <div class="euca-label">HORA</div>
+                  <div class="euca-value" id="eucaHora">5:30 PM</div>
+                </div>
+                <div class="mb-3">
+                  <div class="euca-label">LUGAR</div>
+                  <div class="euca-value" id="eucaLugar">Parroquia de San Juan Bautista</div>
+                </div>
+                <div class="mb-4">
+                  <div class="euca-label">DIRECCIÓN</div>
+                  <div class="euca-value" id="eucaDir">Plaza Ricardo Flores Magón</div>
+                </div>
+                <a href="#" target="_blank" rel="noopener" class="btn btn-euca w-100" id="btnMapsParroquia">
+                  Abrir ubicación de la parroquia
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIESTA -->
+  <section class="container py-5 fiesta" id="fiesta">
+    <div class="glass p-4 p-md-5 position-relative text-center">
+      <div class="party-blob" aria-hidden="true"></div>
+      <!-- stickers decorativos -->
+      <svg width="54" height="24" viewBox="0 0 60 26" class="position-absolute" style="top:16px; left:20px; opacity:.9;" aria-hidden="true">
+        <rect x="4" y="6" width="18" height="12" rx="4" fill="none" stroke="#ff3b3b" stroke-width="4"/>
+        <rect x="30" y="6" width="18" height="12" rx="4" fill="none" stroke="#ff3b3b" stroke-width="4"/>
+        <line x1="22" y1="12" x2="30" y2="12" stroke="#ff3b3b" stroke-width="4"/>
+      </svg>
+      <span class="badge-bk mb-3">¡A bailar! 🛴</span>
+      <h2 class="section-title mb-3">Después seguimos con la fiesta</h2>
+      <p class="fs-5 mb-2"><strong id="fiestaDir">Calle 20 de Noviembre 9, San Juan Ixhuatepec</strong></p>
+      <p class="fs-5 mb-4" style="opacity:.95;">Ven con toda la actitud de diversión y baile.</p>
+      <a href="#" target="_blank" rel="noopener" class="btn btn-bk btn-pink btn-lg" id="btnMapsFiesta">
+        Abrir ubicación de la fiesta
+      </a>
+    </div>
+  </section>
+
+  <!-- CUENTA REGRESIVA -->
+  <section class="container py-5" id="countdown">
+    <div class="text-center mb-4">
+      <p class="eyebrow mb-2" style="color:var(--bk-blue)">La cuenta ya empezó 🚀</p>
+      <h2 class="section-title">Faltan…</h2>
+    </div>
+    <div class="row g-3 justify-content-center" id="countGrid" aria-live="polite">
+      <div class="col-6 col-md-3">
+        <div class="count-box"><div class="count-num" id="cd-dias">00</div><div class="count-label">Días</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="count-box"><div class="count-num" id="cd-horas">00</div><div class="count-label">Horas</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="count-box"><div class="count-num" id="cd-min">00</div><div class="count-label">Minutos</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="count-box"><div class="count-num" id="cd-seg">00</div><div class="count-label">Segundos</div></div>
+      </div>
+    </div>
+    <p class="text-center fs-3 fw-bold mt-4 d-none" id="countDone" style="color:var(--bk-yellow)">¡Hoy celebramos a Bek Jan! 🎉</p>
+  </section>
+
+  <!-- TEMÁTICA -->
+  <section class="container py-5" id="tematica">
+    <div class="text-center mb-4">
+      <p class="eyebrow mb-2" style="color:var(--bk-pink)">Vibra retro-espacial</p>
+      <h2 class="section-title">
+        Modo Bek Jan activado
+        <svg class="ico-lentes" viewBox="0 0 90 40" role="img" aria-label="lentes rojos">
+          <rect x="6" y="8" width="30" height="22" rx="7" fill="none" stroke="#ff3b3b" stroke-width="6"/>
+          <rect x="52" y="8" width="30" height="22" rx="7" fill="none" stroke="#ff3b3b" stroke-width="6"/>
+          <line x1="36" y1="18" x2="52" y2="18" stroke="#ff3b3b" stroke-width="6"/>
+        </svg>
+      </h2>
+      <p class="fs-5 mx-auto mt-3" style="max-width:720px; opacity:.95;">
+        La fiesta tendrá una vibra divertida inspirada en lentes rojos, colores retro, música,
+        baile y mucha actitud.
+      </p>
+    </div>
+    <div class="row g-4" id="temaGrid">
+      <!-- Cards generadas dinámicamente -->
+    </div>
+  </section>
+
+  <!-- FAMILIA Y PADRINOS -->
+  <section class="container py-5" id="familia">
+    <div class="text-center mb-4">
+      <p class="eyebrow mb-2" style="color:var(--bk-yellow)">Con amor ❤️</p>
+      <h2 class="section-title">Y con cariño de mi familia</h2>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="fam-card text-center h-100">
+          <div class="fs-2 mb-2">🌸</div>
+          <div class="eyebrow mb-1" style="color:var(--bk-pink)">Mamá</div>
+          <div class="fs-5 fw-bold" id="famMama">Noemi Sarahi Mendoza Moreno</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="fam-card text-center h-100">
+          <div class="fs-2 mb-2">⭐</div>
+          <div class="eyebrow mb-1" style="color:var(--bk-blue)">Papá</div>
+          <div class="fs-5 fw-bold" id="famPapa">Juan Carlos Hernández Cruz</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="fam-card text-center h-100">
+          <div class="fs-2 mb-2">💛</div>
+          <div class="eyebrow mb-1" style="color:var(--bk-yellow)">Madrina</div>
+          <div class="fs-5 fw-bold" id="famPad1">Araceli Mendoza Moreno</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="fam-card text-center h-100">
+          <div class="fs-2 mb-2">💫</div>
+          <div class="eyebrow mb-1" style="color:var(--bk-green)">Padrino</div>
+          <div class="fs-5 fw-bold" id="famPad2">Javier Mendoza Moreno</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSDATA DE REGALOS -->
+  <section class="gift-note-section py-5" id="posdata">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+          <article class="gift-note-card">
+
+            <span class="gift-note-badge">
+              <svg class="ico-star" viewBox="0 0 40 40" aria-hidden="true">
+                <path d="M20 2 L25 15 L39 15 L28 24 L32 38 L20 29 L8 38 L12 24 L1 15 L15 15 Z" fill="#ffe14d"/>
+              </svg>
+              NOTITA ESPECIAL
+            </span>
+
+            <h2>Posdata de Bek Jan</h2>
+
+            <p>
+              Si quieres traerme un regalito, te cuento que soy
+              <strong id="posdataTalla">talla 10</strong> en ropa.
+            </p>
+
+            <p>
+              También me encantan <strong id="posdataGustos">los carritos, las pistolas de agua y los LEGOs </strong>
+              para construir cosas con mi súper imaginación.
+            </p>
+
+            <!-- Los tres juguetes en fila al pie de la nota -->
+            <div class="gift-toys" aria-hidden="true">
+              <img class="toy toy-water" src="Pistola.png" alt="" loading="lazy" />
+              <img class="toy toy-car"   src="car1.png"    alt="" loading="lazy" />
+              <img class="toy toy-legos" src="legos.png"   alt="" loading="lazy" />
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="container py-5" id="rsvp">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+        <div class="glass p-4 p-md-5 text-center">
+          <p class="eyebrow mb-2" style="color:var(--bk-green)">Te esperamos 🎈</p>
+          <h2 class="section-title mb-4">¿Nos acompañas?</h2>
+
+          <form id="formRsvp" class="text-start" novalidate>
+            <div class="row g-3 justify-content-center mb-3">
+              <div class="col-12 col-md-8">
+                <label for="nombreInvitado" class="form-label fw-bold">Tu nombre o familia</label>
+                <input type="text" id="nombreInvitado" name="nombre" required
+                       minlength="2" maxlength="80" autocomplete="name"
+                       class="form-control form-control-bk"
+                       placeholder="Ejemplo: Familia Hernández" />
+              </div>
+
+              <div class="col-12 col-md-8">
+                <span class="form-label fw-bold d-block mb-2">¿Nos acompañas?</span>
+                <div class="d-flex flex-wrap gap-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="asistira"
+                           id="asisteSi" value="si" checked />
+                    <label class="form-check-label" for="asisteSi">Sí, ahí estaré</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="asistira"
+                           id="asisteNo" value="no" />
+                    <label class="form-check-label" for="asisteNo">No podré asistir</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-8" id="grupoPersonas">
+                <label for="numPersonas" class="form-label fw-bold">¿Cuántas personas van?</label>
+                <input type="number" id="numPersonas" name="personas"
+                       min="1" max="15" step="1" value="1" inputmode="numeric"
+                       class="form-control form-control-bk" />
+              </div>
+
+              <div class="col-12 col-md-8">
+                <label for="mensajeInvitado" class="form-label fw-bold">
+                  Mensaje para Bek Jan <span class="fw-normal" style="opacity:.7">(opcional)</span>
+                </label>
+                <textarea id="mensajeInvitado" name="mensaje" rows="3" maxlength="300"
+                          class="form-control form-control-bk"
+                          placeholder="Déjale unas palabras bonitas"></textarea>
+              </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-3 justify-content-center mb-3">
+              <button type="submit" class="btn btn-bk btn-green" id="btnEnviarRsvp"
+                      style="background:var(--bk-green); color:#123300;">
+                Enviar confirmación
+              </button>
+              <button type="button" class="btn btn-bk btn-blue" id="btnWhatsapp">
+                Confirmar por WhatsApp
+              </button>
+              <button type="button" class="btn btn-outline-bk" id="btnCopiar">Copiar detalles 📋</button>
+            </div>
+          </form>
+
+          <p class="status-msg" id="statusMsg" role="status" aria-live="polite"></p>
+
+          <div class="copy-fallback d-none text-start mt-3" id="copyFallback" tabindex="0"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-wrap text-center py-5" role="contentinfo">
+    <hr class="divider-doodle mx-auto" style="max-width:80%;" />
+    <div class="container position-relative py-4">
+      <span class="footer-halo" aria-hidden="true"></span>
+      <h2 class="section-title mb-2">Gracias por acompañarme en este gran día</h2>
+      <p class="fs-5" style="opacity:.9;">
+        Con cariño, <strong>Bek Jan</strong> y familia
+        <svg class="ico-lentes" viewBox="0 0 90 40" role="img" aria-label="lentes rojos">
+          <rect x="6" y="8" width="30" height="22" rx="7" fill="none" stroke="#ff3b3b" stroke-width="6"/>
+          <rect x="52" y="8" width="30" height="22" rx="7" fill="none" stroke="#ff3b3b" stroke-width="6"/>
+          <line x1="36" y1="18" x2="52" y2="18" stroke="#ff3b3b" stroke-width="6"/>
+        </svg> ✨
+      </p>
+    </div>
+
+    <!-- Carril propio para el mini scooter, así no se cruza con el texto -->
+    <div class="scooter-lane" aria-hidden="true">
+      <div class="scooter-run" aria-hidden="true">
+        <img src="Pat.png" alt="" loading="lazy" />
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- /.site-content -->
+
+  <!-- AUDIO (opt-in: solo suena si el invitado pulsa el botón, nunca autoplay).
+       Reemplaza el archivo por una canción propia, con licencia o libre de derechos.
+       La ruta se configura en INVITACION.cancion -->
+  <audio id="partyAudio" preload="metadata" loop>
+    <source src="Cancion.mp3" type="audio/mpeg" />
+    Tu navegador no soporta audio HTML.
+  </audio>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+  <script src="supabase-config.js"></script>
+
+  <script>
+    // CONFIGURACIÓN EDITABLE
+    const INVITACION = {
+      nombre: "Bek Jan Hernández Mendoza",
+      apodo: "Bek Jan",
+      edad: 8,
+      fechaTexto: "Sábado 8 de agosto de 2026",
+      fechaISO: "2026-08-08T17:30:00-06:00",
+      horaMisa: "5:30 PM",
+      parroquia: "Parroquia de San Juan Bautista",
+      direccionParroquia: "Plaza Ricardo Flores Magón",
+      direccionFiesta: "Calle 20 de Noviembre 9, San Juan Ixhuatepec",
+      mapsParroquia: "https://maps.app.goo.gl/SWrwabWj1k1Cd5z6A",
+      mapsFiesta: "https://maps.app.goo.gl/3duVA3wPXx4CaW6K7",
+      whatsapp: "525565624153",
+      mama: "Noemi Sarahi Mendoza Moreno",
+      papa: "Juan Carlos Hernández Cruz",
+      padrinos: ["Araceli Mendoza Moreno", "Javier Mendoza Moreno"],
+      // Ruta del archivo de música. Usa una canción propia, con licencia
+      // o libre de derechos. No incluyas grabaciones comerciales sin autorización.
+      cancion: "Cancion.mp3",
+      posdata: {
+        talla: "10",
+        gustos: ["los carritos", "las pistolas de agua", "los LEGOs"]
+      }
+    };
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---- Imagen principal de Bek Jan con respaldo a SVG ----
+    (function heroImageFallback() {
+      const img = document.getElementById('bekojitoImg');
+      const frame = document.getElementById('bekojitoFrame');
+      const svg = document.getElementById('bekojitoSvg');
+      const halo = document.getElementById('heroHalo');
+      if (!img || !svg) return;
+      img.addEventListener('error', () => {
+        // Si la imagen no existe, mostramos el avatar SVG con su halo animado
+        if (frame) frame.classList.add('d-none');
+        svg.classList.remove('d-none');
+        if (halo) halo.classList.remove('d-none');
+      });
+    })();
+
+    // ---- Poblar contenido desde INVITACION ----
+    (function fillContent() {
+      const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+      set('heroFecha', INVITACION.fechaTexto);
+      set('heroHora', INVITACION.horaMisa);
+      set('heroMotivo', `Presentación de ${INVITACION.edad} años`);
+      set('eucaDia', INVITACION.fechaTexto);
+      set('eucaHora', INVITACION.horaMisa);
+      set('eucaLugar', INVITACION.parroquia);
+      set('eucaDir', INVITACION.direccionParroquia);
+      set('fiestaDir', INVITACION.direccionFiesta);
+      set('famMama', INVITACION.mama);
+      set('famPapa', INVITACION.papa);
+      set('famPad1', INVITACION.padrinos[0] || '');
+      set('famPad2', INVITACION.padrinos[1] || '');
+
+      // Posdata: talla y gustos editables desde INVITACION.posdata
+      const pd = INVITACION.posdata;
+      if (pd) {
+        set('posdataTalla', `talla ${pd.talla}`);
+        const g = pd.gustos || [];
+        const lista = g.length > 1
+          ? g.slice(0, -1).join(', ') + ' y ' + g[g.length - 1]
+          : (g[0] || '');
+        set('posdataGustos', lista);
+      }
+
+      const bp = document.getElementById('btnMapsParroquia');
+      if (bp) bp.href = INVITACION.mapsParroquia;
+      const bf = document.getElementById('btnMapsFiesta');
+      if (bf) bf.href = INVITACION.mapsFiesta;
+    })();
+
+    // ---- Cards de temática ----
+    (function buildTema() {
+      const temas = [
+        {
+          icon: `<svg class="ico-lentes" viewBox="0 0 90 40" role="img" aria-label="lentes rojos">
+                   <rect x="6" y="8" width="30" height="22" rx="7" fill="none" stroke="#ff3b3b" stroke-width="6"/>
+                   <rect x="52" y="8" width="30" height="22" rx="7" fill="none" stroke="#ff3b3b" stroke-width="6"/>
+                   <line x1="36" y1="18" x2="52" y2="18" stroke="#ff3b3b" stroke-width="6"/>
+                 </svg>`,
+          title: 'Lentes rojos', text: 'El accesorio oficial de la fiesta.'
+        },
+        { icon: '📼', title: 'Look retro', text: 'Vibra noventera y colores intensos.' },
+        { icon: '🌈', title: 'Colores divertidos', text: 'Rosa, azul, morado y mucho brillo.' },
+        { icon: '🕺', title: 'Actitud de baile', text: 'Ven listo para moverte sin parar.' },
+        { icon: '📸', title: 'Fotos familiares', text: 'Capturamos cada momento especial.' },
+        { icon: '😄', title: 'Sonrisa lista', text: 'La mejor energía para celebrar.' }
+      ];
+      const grid = document.getElementById('temaGrid');
+      temas.forEach(t => {
+        const col = document.createElement('div');
+        col.className = 'col-12 col-md-6 col-lg-4';
+        col.innerHTML = `
+          <div class="theme-card position-relative">
+            <span class="sticker-tape">Bek Jan</span>
+            <div class="theme-ico"><span class="fs-2">${t.icon}</span></div>
+            <h3 class="h5 fw-bold">${t.title}</h3>
+            <p class="mb-0" style="opacity:.9;">${t.text}</p>
+          </div>`;
+        grid.appendChild(col);
+      });
+    })();
+
+    // ---- CONFETTI ----
+    function launchConfetti(reduceMotion) {
+      if (reduceMotion) return;
+      if (typeof confetti !== 'function') { fallbackConfetti(); return; }
+      const base = {
+        disableForReducedMotion: true,
+        colors: ['#ffe14d', '#ff2aa3', '#18c8ff', '#a7ff3c']
+      };
+      confetti({ ...base, particleCount: 70, spread: 78, origin: { y: 0.72 } });
+      window.setTimeout(() => {
+        confetti({ ...base, particleCount: 45, spread: 100, origin: { x: 0.18, y: 0.46 } });
+      }, 220);
+      window.setTimeout(() => {
+        confetti({ ...base, particleCount: 45, spread: 100, origin: { x: 0.82, y: 0.46 } });
+      }, 390);
+    }
+
+    // Fallback simple con divs animados
+    function fallbackConfetti() {
+      if (reduceMotion) return;
+      const colors = ['#ffe14d', '#ff2aa3', '#18c8ff', '#a7ff3c'];
+      for (let i = 0; i < 40; i++) {
+        const p = document.createElement('div');
+        p.style.cssText = `position:fixed;top:-20px;left:${Math.random()*100}vw;width:10px;height:14px;
+          background:${colors[i%colors.length]};z-index:9999;border-radius:2px;pointer-events:none;
+          transform:rotate(${Math.random()*360}deg);opacity:.9;`;
+        document.body.appendChild(p);
+        const dur = 1800 + Math.random()*1400;
+        p.animate([
+          { transform: `translateY(0) rotate(0deg)` },
+          { transform: `translateY(${window.innerHeight + 60}px) rotate(${Math.random()*720}deg)` }
+        ], { duration: dur, easing: 'ease-in' });
+        setTimeout(() => p.remove(), dur);
+      }
+    }
+
+    // ---- CUENTA REGRESIVA ----
+    (function countdown() {
+      const target = new Date(INVITACION.fechaISO).getTime();
+      const elD = document.getElementById('cd-dias');
+      const elH = document.getElementById('cd-horas');
+      const elM = document.getElementById('cd-min');
+      const elS = document.getElementById('cd-seg');
+      const grid = document.getElementById('countGrid');
+      const done = document.getElementById('countDone');
+      if (!grid || !done || !elD || !elH || !elM || !elS) return;
+
+      const pad = n => String(n).padStart(2, '0');
+      // Se declara antes de tick() para que exista si el evento ya pasó
+      let timer = null;
+
+      // Si la fecha del objeto de configuración fuera inválida, no rompemos la página
+      if (Number.isNaN(target)) {
+        grid.classList.add('d-none');
+        return;
+      }
+
+      function tick() {
+        let diff = target - Date.now();
+
+        if (diff <= 0) {
+          grid.classList.add('d-none');
+          done.classList.remove('d-none');
+          if (timer !== null) {
+            clearInterval(timer);
+            timer = null;
+          }
+          return;
+        }
+
+        const d = Math.floor(diff / 86400000); diff -= d * 86400000;
+        const h = Math.floor(diff / 3600000);  diff -= h * 3600000;
+        const m = Math.floor(diff / 60000);    diff -= m * 60000;
+        const s = Math.floor(diff / 1000);
+        elD.textContent = pad(d);
+        elH.textContent = pad(h);
+        elM.textContent = pad(m);
+        elS.textContent = pad(s);
+      }
+
+      tick();
+      // Solo se arranca el intervalo si el evento aún no ha ocurrido
+      if (target - Date.now() > 0) {
+        timer = setInterval(tick, 1000);
+      }
+    })();
+
+    // ---- Detalles para copiar ----
+    function detallesTexto() {
+      return [
+        `Presentación y cumpleaños ${INVITACION.edad} de ${INVITACION.nombre}`,
+        `${INVITACION.fechaTexto} · ${INVITACION.horaMisa}`,
+        `Celebración: ${INVITACION.parroquia}, ${INVITACION.direccionParroquia}`,
+        `Fiesta: ${INVITACION.direccionFiesta}`
+      ].join('\n');
+    }
+
+    function setStatus(msg) {
+      const el = document.getElementById('statusMsg');
+      if (el) el.textContent = msg;
+    }
+
+    // ---- Eventos de botones ----
+    document.getElementById('btnConfetti').addEventListener('click', (e) => {
+      launchConfetti(reduceMotion);
+      // Pequeño rebote de respuesta al pulsar
+      if (!reduceMotion) {
+        const b = e.currentTarget;
+        b.animate(
+          [{ transform: 'scale(1)' }, { transform: 'scale(0.94)' }, { transform: 'scale(1.06)' }, { transform: 'scale(1)' }],
+          { duration: 420, easing: 'ease-out' }
+        );
+      }
+    });
+
+    document.getElementById('btnWhatsapp').addEventListener('click', () => {
+      const nombre = document.getElementById('nombreInvitado').value.trim();
+      let mensaje;
+      if (nombre) {
+        mensaje = `Hola, soy ${nombre}. Confirmo asistencia a la presentación y cumpleaños 8 de ${INVITACION.nombre}. ¡Nos vemos con toda la actitud de diversión y baile!`;
+      } else {
+        mensaje = `Hola. Confirmo asistencia al cumpleaños de ${INVITACION.nombre}. ¡Nos vemos con toda la actitud de diversión y baile!`;
+      }
+
+      if (!INVITACION.whatsapp || INVITACION.whatsapp === "521XXXXXXXXXX") {
+        setStatus("Falta colocar el número real de WhatsApp en la configuración del archivo.");
+        return;
+      }
+
+      launchConfetti(reduceMotion);
+      setStatus("Abriendo WhatsApp para enviar tu confirmación…");
+      const url = `https://wa.me/${INVITACION.whatsapp}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank', 'noopener');
+    });
+
+    // ---- SUPABASE: envío de confirmaciones ----
+    (function rsvpSupabase() {
+      const form = document.getElementById('formRsvp');
+      const btn = document.getElementById('btnEnviarRsvp');
+      const grupoPersonas = document.getElementById('grupoPersonas');
+      const inputPersonas = document.getElementById('numPersonas');
+      if (!form || !btn) return;
+
+      // Mostrar u ocultar el número de personas según la respuesta
+      form.querySelectorAll('input[name="asistira"]').forEach((radio) => {
+        radio.addEventListener('change', () => {
+          const asiste = form.querySelector('input[name="asistira"]:checked').value === 'si';
+          grupoPersonas.classList.toggle('d-none', !asiste);
+        });
+      });
+
+      // Cliente de Supabase. Si falta configuración, el formulario avisa
+      // y el invitado puede usar el botón de WhatsApp.
+      let db = null;
+      const cfg = window.SUPABASE_CONFIG;
+      const configurado = cfg && !cfg.url.includes('TU-PROYECTO') && !cfg.anonKey.includes('TU_ANON_KEY');
+
+      if (configurado && window.supabase) {
+        db = window.supabase.createClient(cfg.url, cfg.anonKey);
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const nombre = document.getElementById('nombreInvitado').value.trim();
+        const asistira = form.querySelector('input[name="asistira"]:checked').value === 'si';
+        const mensaje = document.getElementById('mensajeInvitado').value.trim();
+        const personas = asistira ? Math.min(15, Math.max(1, parseInt(inputPersonas.value, 10) || 1)) : 1;
+
+        if (nombre.length < 2) {
+          setStatus('Escribe tu nombre para poder confirmar.');
+          document.getElementById('nombreInvitado').focus();
+          return;
+        }
+
+        if (!db) {
+          setStatus('Todavía falta conectar la base de datos. Usa el botón de WhatsApp por ahora.');
+          return;
+        }
+
+        btn.disabled = true;
+        const textoOriginal = btn.textContent;
+        btn.textContent = 'Enviando…';
+        setStatus('');
+
+        const { error } = await db.from('confirmaciones').insert({
+          nombre,
+          asistira,
+          personas,
+          mensaje: mensaje || null
+        });
+
+        btn.disabled = false;
+        btn.textContent = textoOriginal;
+
+        if (error) {
+          console.warn('Error al guardar la confirmación:', error);
+          setStatus('No se pudo enviar. Revisa tu conexión o confirma por WhatsApp.');
+          return;
+        }
+
+        form.classList.add('d-none');
+        setStatus(asistira
+          ? '¡Gracias por confirmar! Nos vemos el 8 de agosto. 🎉'
+          : 'Gracias por avisarnos. Te vamos a extrañar. 💛');
+        launchConfetti(reduceMotion);
+      });
+    })();
+
+    // ---- MÚSICA (opt-in, sin autoplay) ----
+    (function musicPlayer() {
+      const audio = document.getElementById('partyAudio');
+      const musicToggle = document.getElementById('musicToggle');
+      const musicStatus = document.getElementById('musicStatus');
+      if (!audio || !musicToggle) return;
+
+      // Ruta configurable desde INVITACION.cancion
+      if (INVITACION.cancion) audio.src = INVITACION.cancion;
+      audio.volume = 0.55;
+
+      const label = musicToggle.querySelector('.music-label') || musicToggle;
+      const hint = document.querySelector('.music-hint');
+      const LABEL_PLAY = 'Activar canción';
+      const LABEL_PAUSE = 'Pausar canción';
+      let isPlaying = false;
+
+      const setStatus = (msg) => { if (musicStatus) musicStatus.textContent = msg; };
+      const setLabel = (txt) => { label.textContent = txt; };
+
+      musicToggle.addEventListener('click', async () => {
+        try {
+          if (!isPlaying) {
+            setLabel('Cargando canción…');
+            await audio.play();
+
+            isPlaying = true;
+            setLabel(LABEL_PAUSE);
+            musicToggle.setAttribute('aria-pressed', 'true');
+            musicToggle.setAttribute('aria-label', 'Pausar canción');
+            document.body.classList.add('music-on');
+            if (hint) hint.textContent = 'Sonando ahora 🎶';
+            setStatus('Canción activada.');
+
+            launchConfetti(reduceMotion);
+          } else {
+            audio.pause();
+
+            isPlaying = false;
+            setLabel(LABEL_PLAY);
+            musicToggle.setAttribute('aria-pressed', 'false');
+            musicToggle.setAttribute('aria-label', 'Activar canción');
+            document.body.classList.remove('music-on');
+            if (hint) hint.textContent = 'Sube el volumen 🔊';
+            setStatus('Canción pausada.');
+          }
+        } catch (error) {
+          // El navegador puede bloquear la reproducción (NotAllowedError)
+          isPlaying = false;
+          setLabel(LABEL_PLAY);
+          musicToggle.setAttribute('aria-pressed', 'false');
+          musicToggle.setAttribute('aria-label', 'Activar canción');
+          document.body.classList.remove('music-on');
+          if (hint) hint.textContent = 'Toca de nuevo para activar 🔊';
+          setStatus('Toca nuevamente para activar la canción.');
+          console.warn('No se pudo reproducir el audio:', error);
+        }
+      });
+
+      audio.addEventListener('ended', () => {
+        isPlaying = false;
+        setLabel(LABEL_PLAY);
+        musicToggle.setAttribute('aria-pressed', 'false');
+        document.body.classList.remove('music-on');
+        if (hint) hint.textContent = 'Sube el volumen 🔊';
+      });
+
+      // Si el archivo no existe o no se puede cargar
+      audio.addEventListener('error', () => {
+        setLabel('Agrega la canción');
+        musicToggle.disabled = true;
+        document.body.classList.remove('music-on');
+        if (hint) hint.textContent = '';
+        setStatus('Aún falta agregar el archivo de canción.');
+      });
+    })();
+
+    document.getElementById('btnCopiar').addEventListener('click', async () => {
+      const texto = detallesTexto();
+      const fallback = document.getElementById('copyFallback');
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(texto);
+          fallback.classList.add('d-none');
+          setStatus("Detalles copiados. Ya puedes pegarlos donde quieras.");
+          launchConfetti(reduceMotion);
+        } else {
+          throw new Error('clipboard no disponible');
+        }
+      } catch (e) {
+        fallback.textContent = "El navegador no permitió copiar automáticamente. Selecciona y copia estos datos.\n\n" + texto;
+        fallback.classList.remove('d-none');
+        setStatus("");
+        fallback.focus();
+        launchConfetti(reduceMotion);
+      }
+    });
+  </script>
+</body>
+</html>
