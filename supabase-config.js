@@ -12,6 +12,6 @@
    daría acceso total a tus datos.
    ============================================================ */
 window.SUPABASE_CONFIG = {
-  url: "https://TU-PROYECTO.supabase.co",
-  anonKey: "TU_ANON_KEY"
+  url: "https://gscwokoaoieqgusikqyf.supabase.co",
+  anonKey: "sb_publishable_N4vmwUJGYFlilFzlHyyQ_Q_nFSKk53t"
 };
